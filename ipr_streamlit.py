@@ -7,20 +7,6 @@ Created on Thu Sep 23 12:38:02 2021
 import streamlit as st
 import numpy as np
 st.title("Oil well performance")
- st.markdown(
-    """
-    <style>
-    .reportview-container {
-        background: url("url_goes_here")
-    }
-   .sidebar .sidebar-content {
-        background: url("url_goes_here")
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 
 Pr=st.sidebar.number_input("Average Reservoir Pressure",min_value=float(0), max_value=float(10000000000000000000),step=0.5,value=float(2500))
 qo=st.sidebar.number_input("Oil Flowrate",min_value=float(0), max_value=float(1000000000000000000),step=0.5,value=float(350))
