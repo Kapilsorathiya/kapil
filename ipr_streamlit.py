@@ -169,9 +169,6 @@ fut=st.sidebar.radio("Select the method",future)
 
 butten1 = st.sidebar.button('Apply')
 if butten1:
-    audio_file = open('Ek Tarfa - Darshan Rawal.mp3', 'rb')
-    audio_bytes = audio_file.read()
-    st.audio(audio_bytes, format='audio/mp3')
     call()
     if fut=="Vogel's first":
         st.write("**Prediction of future IPRs**")
