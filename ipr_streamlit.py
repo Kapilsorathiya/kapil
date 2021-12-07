@@ -95,13 +95,16 @@ def wiggins_saturated():
         
 def call():
     if curve=="Vogel's":
+        if Pwf>Pb or Pwf>Pr:
+            st.write("Reservoir fluid is not comming in wellbore because flowing hole pressure is greater")
         st.write("** Using Vogel's method**")
         if Pr<=Pb:
             st.write("Saturated Reservoir with Bubble point pressure ",Pb ,"psi.")
             saturated_reservoir()
         elif Pr>Pb:
             st.write("Undersaturated Reservoir with Bubble point pressure ",Pb ,"psi.")
-            undersaturated_reservoir() 
+            undersaturated_reservoir()
+
     if curve=="Wiggin's":
         st.write("** Using Wiggin's method**")
         wiggins_saturated()
