@@ -1,17 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Sep 23 12:38:02 2021
-
-@author: kapil
-"""
 import streamlit as st
 import numpy as np
 st.title("Oil well performance")
 
-Pr=st.sidebar.number_input("Average Reservoir Pressure (psi)",min_value=float(1), max_value=float(10000000000000000000),step=10,value=float(2500))
-qo=st.sidebar.number_input("Oil Flowrate (bbl/day)",min_value=float(1), max_value=float(1000000000000000000),step=10,value=float(350))
-Pwf=st.sidebar.number_input("Flowing Bottomhole Pressure (psi)",min_value=float(1), max_value=float(100000000000000000),step=10,value=float(2000))
-Pb=st.sidebar.number_input("Bubble Point Pressure (psi)",min_value=float(1), max_value=float(100000000000000000000),step=10,value=float(2500))
+Pr=st.sidebar.number_input("Average Reservoir Pressure (psi)",min_value=float(2), max_value=float(10000000000000000000),step=10.0,value=float(2500))
+qo=st.sidebar.number_input("Oil Flowrate (bbl/day)",min_value=float(1), max_value=float(1000000000000000000),step=10.0,value=float(350))
+Pwf=st.sidebar.number_input("Flowing Bottomhole Pressure (psi)",min_value=float(1), max_value=float(100000000000000000),step=10.0,value=float(2000))
+Pb=st.sidebar.number_input("Bubble Point Pressure (psi)",min_value=float(1), max_value=float(100000000000000000000),step=10.0,value=float(2500))
 
 IPR=["Vogel's","Wiggin's"]
 
@@ -161,14 +155,14 @@ def fut_Wiggin():
     st.write(fig)
 
 st.sidebar.write("** For future oil well performance**")
-Prf=st.sidebar.number_input("Future Reservoir Pressure",min_value=float(0), max_value=float(10000000000000000000),step=0.5,value=float(2200))
+Prf=st.sidebar.number_input("Future Reservoir Pressure",min_value=float(1), max_value=float(10000000000000000000),step=10.0,value=float(2200))
 future=["Vogel's first","Vogel's second (Fetkovich)","Wiggin's"]
 fut=st.sidebar.radio("Select the method",future)
 
 butten1 = st.sidebar.button('Apply')
-if butten1:
-    call()
-    if Prf<=Pr:
+if Prf<=Pr:
+    if butten1:
+        call()
         if fut=="Vogel's first":
             st.write("**Prediction of future IPRs**")
             st.write("** Using Vogel's first method**")
@@ -187,3 +181,5 @@ if butten1:
             st.write("** Using Wiggin's method**")
             st.write("**Prediction of future IPRs**")
             fut_Wiggin()
+else:
+    st.write("**Future Reservoir pressure should be less than Present reservoir pressure.**")
