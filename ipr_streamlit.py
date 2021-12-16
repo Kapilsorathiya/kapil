@@ -8,10 +8,10 @@ import streamlit as st
 import numpy as np
 st.title("Oil well performance")
 
-Pr=st.sidebar.number_input("Average Reservoir Pressure",min_value=float(0), max_value=float(10000000000000000000),step=0.5,value=float(2500))
-qo=st.sidebar.number_input("Oil Flowrate",min_value=float(0), max_value=float(1000000000000000000),step=0.5,value=float(350))
-Pwf=st.sidebar.number_input("Flowing Bottomhole Pressure",min_value=float(0), max_value=float(100000000000000000),step=0.5,value=float(2000))
-Pb=st.sidebar.number_input("Bubble Point Pressure",min_value=float(0), max_value=float(100000000000000000000),step=0.5,value=float(2500))
+Pr=st.sidebar.number_input("Average Reservoir Pressure (psi)",min_value=float(1), max_value=float(10000000000000000000),step=10,value=float(2500))
+qo=st.sidebar.number_input("Oil Flowrate (bbl/day)",min_value=float(1), max_value=float(1000000000000000000),step=10,value=float(350))
+Pwf=st.sidebar.number_input("Flowing Bottomhole Pressure (psi)",min_value=float(1), max_value=float(100000000000000000),step=10,value=float(2000))
+Pb=st.sidebar.number_input("Bubble Point Pressure (psi)",min_value=float(1), max_value=float(100000000000000000000),step=10,value=float(2500))
 
 IPR=["Vogel's","Wiggin's"]
 
@@ -168,21 +168,22 @@ fut=st.sidebar.radio("Select the method",future)
 butten1 = st.sidebar.button('Apply')
 if butten1:
     call()
-    if fut=="Vogel's first":
-        st.write("**Prediction of future IPRs**")
-        st.write("** Using Vogel's first method**")
-        if Pr==Pb:
-            First_Approximation_Method()
-        else:
-            st.write("Vogel's first only works if initial reservoir pressure is equal to the bubble point pressure")
-    if fut=="Vogel's second (Fetkovich)":
-        st.write("**Prediction of future IPRs**")
-        st.write("** Using Vogel's second (Fetkovich) method**")
-        if Pr==Pb:
-            Second_Approximation_Method()
-        else:
-            st.write("Vogel's first only works if initial reservoir pressure is equal to the bubble point pressure")     
-    if fut=="Wiggin's":
-        st.write("** Using Wiggin's method**")
-        st.write("**Prediction of future IPRs**")
-        fut_Wiggin()
+    if Prf<=Pr:
+        if fut=="Vogel's first":
+            st.write("**Prediction of future IPRs**")
+            st.write("** Using Vogel's first method**")
+            if Pr==Pb:
+                First_Approximation_Method()
+            else:
+                st.write("Vogel's first only works if initial reservoir pressure is equal to the bubble point pressure")
+        if fut=="Vogel's second (Fetkovich)":
+            st.write("**Prediction of future IPRs**")
+            st.write("** Using Vogel's second (Fetkovich) method**")
+            if Pr==Pb:
+                Second_Approximation_Method()
+            else:
+                st.write("Vogel's first only works if initial reservoir pressure is equal to the bubble point pressure")     
+        if fut=="Wiggin's":
+            st.write("** Using Wiggin's method**")
+            st.write("**Prediction of future IPRs**")
+            fut_Wiggin()
